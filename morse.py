@@ -1,10 +1,11 @@
+  GNU nano 2.2.6                                                                      File: jakesmorsecode.py                                                                                                                                        Modified  
 
 import RPi.GPIO as GPIO
 from time import sleep
 
 #Define alphabets.
 alpha = ['a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z', ' ']
-morseAlpha = ['.-', '-...', '-.-.', '-..', '.', '..-.', '--.', '....', '..', '.---', ' -.-', '.-..', '--', '-.', '---', '.--.', '--.-', '.-.', '...', '-', '..-', '...-', '.--', '-..-', '-.--', '--..', '/']   
+morseAlpha = ['.- ', '-... ', '-.-. ', '-.. ', '. ', '..-. ', '--. ', '.... ', '.. ', '.--- ', '-.- ', '.-.. ', '-- ', '-. ', '--- ', '.--. ', '--.- ', '.-. ', '... ', '- ', '..- ', '...- ', '.-- ', '-..- ', '-.-- ', '--.. ', '/']
 
 #Get sentence from user then convert it to lower case and get it's length.
 word = input("Input a sentence: ").lower()
@@ -28,23 +29,34 @@ GPIO.setup(18,GPIO.OUT)
 
 #For every character in the morse code determine whether it is "-", ".", or " " and act appropriately.
 for m in range(0, morseLength):
-	#If character is ".", print "." and power GPIO 18 for 0.25s.
-	if(morse[m] == '.'):
-		print('.')
-		GPIO.output(18, True)
-		sleep(0.25)
-		GPIO.output(18, False)
+    #If character is ".", print "." and power GPIO 18 for 0.25s.
+    if(morse[m] == '.'):
+        print('.')
+        GPIO.output(18,True)
+        sleep(0.125)
+        GPIO.output(18,False)
+        sleep(0.125)
 
-	#If character is "-", print "-" and power GPIO 18 for 0.5s.
-	elif(morse[m] == '-'):
-	    print('-')
-		GPIO.output(18, True)
-		sleep(0.5)
-		GPIO.output(18, False)	     
+    #If character is "-", print "-" and power GPIO 18 for 0.5s.
+    elif(morse[m] == '-'):
+        print('-')
+        GPIO.output(18,True)
+        sleep(0.375)
+        GPIO.output(18,False)
+        sleep(0.125)
 
-	#If character is " ", print " " and leave GPIO 18 off for 1s.
-	elif(morse[m] == '/'):
-		print('/')
-		GPIO.output(18, False)
-		sleep(1)
-		GPIO.output(18, False)
+    #If character is " ", print " " and leave GPIO 18 off for 1s.
+    elif(morse[m] == '/'):
+        print('/')
+        GPIO.output(18,False)
+        sleep(0.875)
+        GPIO.output(18,False)
+        sleep(0.125)
+
+    elif(morse[m] == ' '):
+        print(' ')
+        GPIO.output(18,False)
+        sleep(0.375)
+        GPIO.output(18,False)
+        sleep(0.125)
+
