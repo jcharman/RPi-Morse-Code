@@ -1,5 +1,3 @@
-  GNU nano 2.2.6                                                                      File: jakesmorsecode.py                                                                                                                                        Modified  
-
 import RPi.GPIO as GPIO
 from time import sleep
 
